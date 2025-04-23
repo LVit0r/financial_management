@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-dismissible fade show shadow-sm border rounded px-4 py-3"
+         style="background-color: #D6E6FB; color: #0B5ED7;" role="alert">
+      <strong>{{ message }}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow p-4" style="width: 100%; max-width: 600px;">
+    <h4 class="card-title text-center mb-4">Cadastrar Entrada</h4>
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="{{ form.value.id_for_label }}" class="form-label">{{ form.value.label }}</label>
+          {{ form.value }}
+          {% if form.value.errors %}
+            <div class="text-danger small">{{ form.value.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <label for="{{ form.origin.id_for_label }}" class="form-label">{{ form.origin.label }}</label>
+          {{ form.origin }}
+          {% if form.origin.errors %}
+            <div class="text-danger small">{{ form.origin.errors }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="{{ form.date.id_for_label }}" class="form-label">{{ form.date.label }}</label>
+          {{ form.date }}
+          {% if form.date.errors %}
+            <div class="text-danger small">{{ form.date.errors }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  
+
+
+<div class="container mt-4 d-flex justify-content-center">
+  <div class="card shadow-sm p-3" style="width: 100%; max-width: 600px;">
+    {% if last_entry %}
+      <h5 class="text-center mb-4">Última Entrada Cadastrada</h5>
+
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <strong>Nome:</strong>  {{last_entry.origin}}
+        </div>
+        <div class="col-md-6">
+          <strong>Valor:</strong> R${{ last_entry.value|floatformat:2 }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Data recebimento:</strong> {{ last_entry.date }}
+        </div>
+        <div class="col-md-6 text-md-start">
+          <!--Espaço opcional para algum campo-->
+        </div>
+      </div>
+
+    {% else %}
+      <p class="text-center">Nenhuma entrada cadastrada ainda.</p>
+    {% endif %}
+
+    <div class="mt-4 text-center">
+      <a href="" class="btn btn-outline-primary">Ver Todas as Entradas</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

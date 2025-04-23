@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block page_title %}{{ page_title }}{% endblock page_title %}
+{% block content %}
+
+
+<form method="post" enctype="multipart/form-data"> {% csrf_token %}
+            
+        <table>
+
+            {{ form.as_table }}
+
+        </table>
+        <p>Tem certeza que deseja excluir: <b>{{expense.exp_name}}?<b></p>
+        <input type="submit" value="Deletar" class="btn btn-primary">
+        
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

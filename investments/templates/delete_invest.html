@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<form method="post"> {% csrf_token %}
+            
+        <table>
+
+            {{ form.as_table }}
+
+        </table>
+        <p>Tem certeza que deseja excluir: <b>{{entry.origin}}?<b></p>
+        <input type="submit" value="Deletar" class="btn btn-primary">
+        
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

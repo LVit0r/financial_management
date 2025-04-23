@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="border rounded shadow p-5" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center mb-4">Registrar</h3>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      {{ form.as_table }}
+    </form>
+    <button type="submit">Registrar</button>
+
+    <p class="text-center mt-3 mb-0">
+      Já tem uma conta? <a href="{% url 'login' %}">Entrar aqui</a>.
+    </p>
+  </div>
+</div>
+{% endblock %}
