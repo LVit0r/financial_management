@@ -5,14 +5,27 @@
 
 
   
-      <form method="post">
-        {% csrf_token %}
-  
-        {{ login_form.as_table}}
-        <input type="submit" value="Entrar">
-      </form>
-
+<form method="post" class="mt-4">
+  {% csrf_token %}
+  <div class="mb-3">
+      {{ login_form.username.label_tag }}
+      {{ login_form.username }}
+      {% if login_form.username.errors %}
+          <div class="text-danger">{{ login_form.username.errors }}</div>
+      {% endif %}
+  </div>
+  <div class="mb-3">
+      {{ login_form.password.label_tag }}
+      {{ login_form.password }}
+      {% if login_form.password.errors %}
+          <div class="text-danger">{{ login_form.password.errors }}</div>
+      {% endif %}
+  </div>
+  <button type="submit" class="btn btn-primary w-100">Entrar</button>
+</form>
+      
      
+      
   
   
 
