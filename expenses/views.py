@@ -7,10 +7,11 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.db.models import Sum
 from django.contrib import messages
+from django.utils.decorators import method_decorator
 
 
 
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class ExpensesOverview(View):
 
     def get(self, request):
@@ -18,7 +19,7 @@ class ExpensesOverview(View):
         return render(request, 'exp_overview.html', {'total_value': total_value})
 
 
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class NewExp(View):
     def get(self, request):
         last_expense = Expenses.objects.last()
@@ -37,7 +38,7 @@ class NewExp(View):
         return render(request, 'new_exp.html', context)        
 
 
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class EditExp(View):
     def get(self, request, id):
         editexp = get_object_or_404(Expenses, pk=id)
@@ -52,7 +53,7 @@ class EditExp(View):
             return redirect('expenses_overview')
         return render(request, 'edit_exp.html', {'form': form})
     
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class DeleteExp(View):
     def get(self, request, id):
         expense = get_object_or_404(Expenses, pk=id)

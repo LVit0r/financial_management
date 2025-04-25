@@ -4,12 +4,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from expenses.views import ExpensesOverview, NewExp, EditExp, DeleteExp
 from investments.views import NewInvest, EditInvest, EntryDelete
-from accounts.views import register_view, login_view
+from accounts.views import register_view, login_view, logout_view
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
     path('', ExpensesOverview.as_view(), name='expenses_overview'),
     path('new_expense/', NewExp.as_view(), name='new_exp'),

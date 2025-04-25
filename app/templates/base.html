@@ -12,7 +12,11 @@
       <a class="nav-link text-dark fw-medium" href="{% url 'expenses_overview' %}">Extrato mensal</a>
       <a class="nav-link text-dark fw-medium" href="{% url 'new_exp' %}">Cadastrar Despesa</a>
       <a class="nav-link text-dark fw-medium" href="{% url 'new_invest' %}">Cadastrar Entrada</a>
+      {% if user.is_authenticated %}
+      <a class="nav-link text-dark fw-medium" href="{% url 'logout' %}">Sair</a>
+      {% endif %}
     </div>
+    
   </nav>
   
   

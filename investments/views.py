@@ -4,8 +4,10 @@ from investments.forms import EntryModelForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class NewInvest(View):
     def get(self, request):
         last_entry = Entry.objects.last()
@@ -21,7 +23,7 @@ class NewInvest(View):
             return redirect('new_invest')
         return render(request, 'new_invest.html', {'form': form})
     
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class EditInvest(View):
     def get(self, request, id):
         editentry = get_object_or_404(Entry, pk=id)
@@ -37,7 +39,7 @@ class EditInvest(View):
         return render(request, 'edit_invest.html', {'form': form})
     
 
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class EntryDelete(View):
     def get(self, request, id):
         entry = get_object_or_404(Entry, pk=id)
