@@ -2,6 +2,57 @@
 {% block content %}
 
 
+
+
+<table class="table table-sm table-hover table-bordered align-middle text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>Despesa</th>
+        <th>Valor</th>
+        <th>Status</th>
+        <th>Data de Pagamento</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for exp in expense %}
+      <tr>
+        <td>{{ exp.exp_name }}</td>
+        <td>R${{exp.value}}</td>
+        <td>
+          {% if exp.status == "Pago" %}
+            <span class="badge bg-success">Pago</span>
+          {% else %}
+            <span class="badge bg-danger">Pendente</span>
+          {% endif %}
+        </td>
+        <td>{{ exp.payday|default:"-" }}</td>
+        <td>
+          {% if exp.status != "Pago" %}
+            <a href="{% url 'editexp' exp.id %}" class="btn btn-sm btn-success me-1">Pagar</a>
+          {% endif %}
+          <a href="{% url 'delete_exp' exp.id %}" class="btn btn-sm btn-danger">Excluir</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+<!--
 <div class="container mt-5">
     <h2 class="text-center mb-4">Despesas</h2>
     <div class="table-responsive">
@@ -34,6 +85,4 @@
     </div>
 </div>
 
-
-
-{% endblock %}
+-->

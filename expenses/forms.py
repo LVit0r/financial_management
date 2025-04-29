@@ -21,7 +21,12 @@ class ExpensesModelForm(forms.ModelForm):
             'payday': forms.DateInput(attrs={
                 'class': 'form-control',
                 'type': 'date'
-            }),
+            }, format='%Y-%m-%d'
+            ),
         }
 
-        
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            # Formatando o valor inicial para aparecer corretamente no input
+            if self.instance and self.instance.payday:
+                self.initial['payday'] = self.instance.payday.strftime('%Y-%m-%dT%H:%M')
