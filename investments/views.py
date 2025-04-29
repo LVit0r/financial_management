@@ -7,6 +7,20 @@ from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
+
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class AllInvests(View):
+    def get(self, request):
+        invests = Entry.objects.all()
+        return render(request, 'all_invests.html', {'invests': invests})
+
+
+
+
+
+
+
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class NewInvest(View):
     def get(self, request):

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Entradas</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow-sm rounded">
+            <thead class="table-light">
+                <tr>
+                    <th>Entrada</th>
+                    <th>Valor</th>
+                    <th>Data do recebimento</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for invest in invests %}
+                    <tr>
+                        <td>{{invest.origin}}</td>
+                        <td>R${{invest.value}}</td>
+                        <td>{{invest.date}}</td>
+                        <td><a href="{% url 'edit_invest' invest.id %}">Pagar</a>
+                            <a href="{% url 'delete_invest' invest.id %}">Excluir</a>
+
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock %}
