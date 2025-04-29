@@ -17,6 +17,13 @@ class ExpensesOverview(View):
     def get(self, request):
         total_value = Expenses.objects.aggregate(total=Sum('value'))['total']
         return render(request, 'exp_overview.html', {'total_value': total_value})
+    
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class AllExpenses(View):
+    def get(self, request):
+        expense = Expenses.objects.all()
+        return render(request, 'all_expenses.html', {'expense': expense})
 
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
@@ -50,7 +57,7 @@ class EditExp(View):
         form = ExpensesModelForm(request.POST or None, instance=editexp)
         if form.is_valid():
             form.save()
-            return redirect('expenses_overview')
+            return redirect('all_exp')
         return render(request, 'edit_exp.html', {'form': form})
     
 @method_decorator(login_required(login_url='login'), name='dispatch')
@@ -64,5 +71,5 @@ class DeleteExp(View):
         expense = get_object_or_404(Expenses, pk=id)
         form = ExpensesModelForm(instance=expense)
         expense_deleted = expense.delete()
-        return redirect('new_exp')
+        return redirect('all_exp')
  

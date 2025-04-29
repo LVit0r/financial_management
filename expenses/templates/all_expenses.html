@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Despesas</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow-sm rounded">
+            <thead class="table-light">
+                <tr>
+                    <th>Despesa</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                    <th>Data de Pagamento</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exp in expense %}
+                    <tr>
+                        <td>{{exp.exp_name}}</td>
+                        <td>R${{exp.value}}</td>
+                        <td><span class="badge bg-danger">{{exp.status}}</span></td>
+                        <td>{{exp.payday}}</td>
+                        <td><a href="{% url 'editexp' exp.id %}">Pagar</a>
+                            <a href="{% url 'delete_exp' exp.id %}">Excluir</a>
+
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock %}
